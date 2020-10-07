@@ -2,8 +2,6 @@ import 'package:CustomerApp/ui/Intro/intro_data.dart';
 import 'package:CustomerApp/ui/splashScreen.dart';
 import 'package:flutter/material.dart';
 
-
-
 class IntroPage extends StatefulWidget {
   @override
   _IntroPageState createState() => _IntroPageState();
@@ -69,64 +67,71 @@ class _IntroPageState extends State<IntroPage> {
             ),
           ),
           SizedBox(height: 50),
-           slideIndex != 2 ? Container(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal:18.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Container(
+          slideIndex != 2
+              ? Container(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 18.0),
                     child: Row(
-                      children: [
-                        for (int i = 0; i < 3; i++)
-                          i == slideIndex
-                              ? _buildPageIndicator(true)
-                              : _buildPageIndicator(false),
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Container(
+                          child: Row(
+                            children: [
+                              for (int i = 0; i < 3; i++)
+                                i == slideIndex
+                                    ? _buildPageIndicator(true)
+                                    : _buildPageIndicator(false),
+                            ],
+                          ),
+                        ),
+                        FlatButton(
+                          onPressed: () {
+                            print("this is slideIndex: $slideIndex");
+                            controller.animateToPage(slideIndex + 1,
+                                duration: Duration(milliseconds: 500),
+                                curve: Curves.linear);
+                          },
+                          child: Image.asset(
+                            'assets/images/Button.png',
+                            height: 60,
+                            fit: BoxFit.cover,
+                          ),
+                        )
                       ],
                     ),
                   ),
-                  FlatButton(
-                    onPressed: () {
-                        print("this is slideIndex: $slideIndex");
-                    controller.animateToPage(slideIndex + 1, duration: Duration(milliseconds: 500), curve: Curves.linear);
-                    },
-                    child: Image.asset(
-                      'assets/images/Button.png',
-                      height: 60,
-                      fit: BoxFit.cover,
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ):Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween, 
-              children: <Widget>[
-                Container(
+                )
+              : Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 18.0),
                   child: Row(
-                    children: [
-                      for (int i = 0; i < 3; i++)
-                        i == slideIndex
-                            ? _buildPageIndicator(true)
-                            : _buildPageIndicator(false),
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Container(
+                        child: Row(
+                          children: [
+                            for (int i = 0; i < 3; i++)
+                              i == slideIndex
+                                  ? _buildPageIndicator(true)
+                                  : _buildPageIndicator(false),
+                          ],
+                        ),
+                      ),
+                      FlatButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Splash()),
+                          );
+                        },
+                        child: Image.asset(
+                          'assets/images/Button.png',
+                          height: 60,
+                          fit: BoxFit.cover,
+                        ),
+                      )
                     ],
                   ),
                 ),
-                FlatButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Splash()),
-                    );
-                  },
-                  child: Image.asset(
-                    'assets/images/Button.png',
-                    height: 60,
-                    fit: BoxFit.cover,
-                  ),
-                )
-              ],
-            ),
         ],
       ),
     );
