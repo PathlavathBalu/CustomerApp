@@ -304,9 +304,6 @@ import 'package:CustomerApp/ui/base_widget.dart';
 import 'package:CustomerApp/ui/loginScreen/create_account.dart';
 import 'package:CustomerApp/ui/loginScreen/forgot_passoword.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:local_auth/auth_strings.dart';
-import 'package:local_auth/local_auth.dart';
 
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
@@ -348,82 +345,9 @@ class _HomeView1State extends State<HomeView1> {
    final webView = FlutterWebviewPlugin();
   TextEditingController controller = TextEditingController(text: url);
 
-   LocalAuthentication auth = LocalAuthentication();
-  bool _canCheckBiometric;
-  List<BiometricType> _availableBiometric;
-  String authorized = "Not authorized";
-
-  //checking bimetrics
-  //this function will check the sensors and will tell us
-  // if we can use them or not
-  Future<void> _checkBiometric() async {
-    bool canCheckBiometric;
-    try {
-      canCheckBiometric = await auth.canCheckBiometrics;
-    } on PlatformException catch (e) {
-      print(e);
-    }
-    if (!mounted) return;
-
-    setState(() {
-      _canCheckBiometric = canCheckBiometric;
-    });
-  }
-
-  //this function will get all the available biometrics inside our device
-  //it will return a list of objects, but for our example it will only
-  //return the fingerprint biometric
-  Future<void> _getAvailableBiometrics() async {
-    List<BiometricType> availableBiometric;
-    try {
-      availableBiometric = await auth.getAvailableBiometrics();
-    } on PlatformException catch (e) {
-      print(e);
-    }
-    if (!mounted) return;
-
-    setState(() {
-      _availableBiometric = availableBiometric;
-    });
-  }
-
-  //this function will open an authentication dialog
-  // and it will check if we are authenticated or not
-  // so we will add the major action here like moving to another activity
-  // or just display a text that will tell us that we are authenticated
-  Future<void> _authenticate() async {
-    bool authenticated = false;
-    AndroidAuthMessages _androidMsg = AndroidAuthMessages(
-
-    );
-    try {
-      authenticated = await auth.authenticateWithBiometrics(
-          localizedReason: "Scan your finger print to authenticate",
-          useErrorDialogs: true,
-          stickyAuth: false,
-          androidAuthStrings: _androidMsg,
-          );
-    } on PlatformException catch (e) {
-      print(e);
-    }
-    if (!mounted) return;
-
-    setState(() {
-      authorized =
-          authenticated ? "Autherized success" : "Failed to authenticate";
-      if (authenticated) {
-       Navigator.of(context).pushNamed("/webview");
-        
-      }
-    });
-  }
-
   @override
   void initState() {
     super.initState();
-    _checkBiometric();
-    _getAvailableBiometrics();
-
      webView.close();
     controller.addListener(() {
       url = controller.text;

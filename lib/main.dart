@@ -3,7 +3,6 @@ import 'package:CustomerApp/ui/Intro/intro_page.dart';
 import 'package:CustomerApp/ui/loginScreen/create_account.dart';
 import 'package:CustomerApp/ui/loginScreen/forgot_passoword.dart';
 import 'package:CustomerApp/ui/splashScreen.dart';
-import 'package:CustomerApp/ui/widgets/Homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:CustomerApp/ui/loginScreen/login.dart';
 
@@ -28,7 +27,7 @@ class MyApp extends StatelessWidget {
     // '/noticeboard' : (BuildContext context) => NoticeBoard(),
      '/createAccount' : (BuildContext context) => CreateAccount(),
      '/profile' :(BuildContext context)=>ForgotPassword(),
-     '/homePage':(BuildContext context)=>HomePage(),
+    // '/homePage':(BuildContext context)=>HomePage(),
        }
     );
   }
