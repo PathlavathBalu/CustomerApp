@@ -312,7 +312,7 @@ import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 String url = "http://54.170.249.39:8080/CustomerApp/";
 
-class HomeView extends StatelessWidget {
+class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -522,42 +522,45 @@ class _HomeView1State extends State<HomeView1> {
                 endIndent: 10,
               ),
               // SizedBox(height: 10.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    width: 200,
-                    child: TextField(
-                      decoration: InputDecoration(
-                          border: InputBorder.none,
-                           hintText: 'Password',
-                           hintStyle: TextStyle(
-                             color: Color(0xff919196),
-                             fontSize: 17,
-                               fontFamily: 'Sfpro',
-                           )
-                           ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ForgotPassword()),
-                      );
-                    },
-                    child: Text(
-                      'Forgot Password',
-                      style: TextStyle(
-                        fontFamily: 'Sfpro',
-                        color: Color(0xff5200C6),
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal:10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: 200,
+                      child: TextField(
+                        decoration: InputDecoration(
+                            border: InputBorder.none,
+                             hintText: 'Password',
+                             hintStyle: TextStyle(
+                               color: Color(0xff919196),
+                               fontSize: 17,
+                                 fontFamily: 'Sfpro',
+                             )
+                             ),
                       ),
                     ),
-                  ),
-                ],
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ForgotPassword()),
+                        );
+                      },
+                      child: Text(
+                        'Forgot Password',
+                        style: TextStyle(
+                          fontFamily: 'Sfpro',
+                          color: Color(0xff5200C6),
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               Divider(
                 color: Colors.grey[700],
@@ -582,46 +585,46 @@ class _HomeView1State extends State<HomeView1> {
                       style: TextStyle(
                         fontFamily: 'Sfpro',
                         color: Colors.white,
-                        fontSize: 14,
+                        fontSize: 15,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 55,
-                  decoration: BoxDecoration(
-                      color: Color(0xffF15A2B),
-                      borderRadius: BorderRadius.circular(5.0)),
-                  child: FlatButton(
-                    onPressed: _authenticate,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          'assets/images/Vector.png',
-                          width: 25,
-                          height: 28,
-                        ),
-                        SizedBox(width: 5),
-                        Text(
-                          'Sign in with fingerprint',
-                          style: TextStyle(
-                            fontFamily: 'Sfpro',
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.all(10.0),
+              //   child: Container(
+              //     width: MediaQuery.of(context).size.width,
+              //     height: 55,
+              //     decoration: BoxDecoration(
+              //         color: Color(0xffF15A2B),
+              //         borderRadius: BorderRadius.circular(5.0)),
+              //     child: FlatButton(
+              //       onPressed: _authenticate,
+              //       child: Row(
+              //         mainAxisAlignment: MainAxisAlignment.center,
+              //         children: [
+              //           Image.asset(
+              //             'assets/images/Vector.png',
+              //             width: 25,
+              //             height: 28,
+              //           ),
+              //           SizedBox(width: 5),
+              //           Text(
+              //             'Sign in with fingerprint',
+              //             style: TextStyle(
+              //               fontFamily: 'Sfpro',
+              //               color: Colors.white,
+              //               fontSize: 14,
+              //               fontWeight: FontWeight.w700,
+              //             ),
+              //           ),
+              //         ],
+              //       ),
+              //     ),
+              //   ),
+              // ),
               SizedBox(height: 10),
               RichText(
                 text: TextSpan(

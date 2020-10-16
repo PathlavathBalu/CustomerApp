@@ -53,7 +53,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    Container(width: 70),
+                    Container(width: 60),
                   ],
                 ),
               ),
@@ -84,7 +84,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  SizedBox(height:10),
+                  SizedBox(height:20),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: TextField(
@@ -103,7 +103,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 indent: 10,
                 endIndent: 10,
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 10),
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Container(

@@ -148,7 +148,7 @@ class _CreateAccountState extends State<CreateAccount> {
                 indent: 10,
                 endIndent: 10,
               ),
-              SizedBox(height: 60),
+              SizedBox(height: 40),
               ListTile(
                 leading: Switch(
           value: isSwitched,
@@ -194,7 +194,7 @@ class _CreateAccountState extends State<CreateAccount> {
                       ),
                     ),
                     TextSpan(
-                      text: "for providing better services",
+                      text: " for providing better services",
                       style: TextStyle(
                         fontFamily: 'Sfpro',
                         color: Color(0xff919196),
@@ -251,7 +251,7 @@ class _CreateAccountState extends State<CreateAccount> {
                       ),
                     ),
                     TextSpan(
-                      text: " &",
+                      text: " & ",
                       style: TextStyle(
                         fontFamily: 'Sfpro',
                         color: Color(0xff919196),
@@ -332,7 +332,7 @@ class _CreateAccountState extends State<CreateAccount> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => HomeView()),
+                                builder: (context) => Login()),
                           );
                         },
                         child: Text(

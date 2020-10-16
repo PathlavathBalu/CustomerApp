@@ -26,7 +26,7 @@ class _SplashState extends State<Splash> {
 
   void navigationPage() {
     Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (BuildContext context) => HomeView()));
+        MaterialPageRoute(builder: (BuildContext context) => Login()));
   }
 
   @override
