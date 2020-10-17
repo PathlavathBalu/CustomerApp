@@ -1,5 +1,7 @@
 
 import 'package:CustomerApp/ui/loginScreen/login.dart';
+import 'package:CustomerApp/ui/restServices/post_rest_service.dart';
+import 'package:CustomerApp/ui/widgets/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 
 class CreateAccount extends StatefulWidget {
@@ -8,8 +10,17 @@ class CreateAccount extends StatefulWidget {
 }
 
 class _CreateAccountState extends State<CreateAccount> {
-   bool isSwitched = true;
-    bool isSwitched1 = false;
+
+  TextEditingController name = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController mobile = TextEditingController();
+  TextEditingController password = TextEditingController();
+  int stVal =1;
+  int proVal = 0;
+  
+
+   bool storedFlag = true;
+    bool promotionFlag = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,6 +88,7 @@ class _CreateAccountState extends State<CreateAccount> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: TextField(
+                  controller: name,
                   decoration: InputDecoration(
                       border: InputBorder.none,
                        hintText: 'Name',
@@ -97,6 +109,7 @@ class _CreateAccountState extends State<CreateAccount> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: TextField(
+                  controller: email,
                   decoration: InputDecoration(
                       border: InputBorder.none, hintText: 'Email',
                        hintStyle: TextStyle(
@@ -115,6 +128,7 @@ class _CreateAccountState extends State<CreateAccount> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: TextField(
+                  controller: password,
                   decoration: InputDecoration(
                       border: InputBorder.none, hintText: 'Password',
                        hintStyle: TextStyle(
@@ -133,6 +147,7 @@ class _CreateAccountState extends State<CreateAccount> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: TextField(
+                  controller: mobile,
                   decoration: InputDecoration(
                       border: InputBorder.none, hintText: 'Mobile Number',
                        hintStyle: TextStyle(
@@ -151,11 +166,12 @@ class _CreateAccountState extends State<CreateAccount> {
               SizedBox(height: 40),
               ListTile(
                 leading: Switch(
-          value: isSwitched,
+          value: storedFlag,
           onChanged: (value){
             setState(() {
-              isSwitched=value;
-              print(isSwitched);
+              storedFlag=value;
+              value ?stVal=1:stVal=0;
+              print(storedFlag);
             });
           },
           activeTrackColor: Color(0xff5200C6),
@@ -208,11 +224,13 @@ class _CreateAccountState extends State<CreateAccount> {
       ),
        ListTile(
                 leading: Switch(
-          value: isSwitched1,
+          value: promotionFlag,
           onChanged: (value){
             setState(() {
-              isSwitched1=value;
-              print(isSwitched1);
+              promotionFlag=value;
+
+            value ? proVal =1:proVal =0;
+              print(promotionFlag);
             });
           },
           activeTrackColor: Color(0xff5200C6),
@@ -294,20 +312,44 @@ class _CreateAccountState extends State<CreateAccount> {
       ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 55,
-                  decoration: BoxDecoration(
-                      color: Color(0xff5200C6),
-                      borderRadius: BorderRadius.circular(5.0)),
-                  child: Center(
-                    child: Text(
-                      'Create account',
-                      style: TextStyle(
-                        fontFamily: 'Sfpro',
-                        color: Colors.white,
-                        fontSize: 17,
-                        fontWeight: FontWeight.w600,
+                child: InkWell(
+
+                  onTap: (){
+
+
+                     PostRestService.registerUser(name.text , email.text, mobile.text, password.text,  stVal , proVal)
+                              .then((result) {
+                            print(result.toString());
+
+                            if (result.status == 1) {
+
+print("navigate to perticular Screen ");
+
+
+                              // Navigator.of(context).pushNamed("/webview");
+
+
+
+
+                            } else
+                              errorBottomSheet(result.msg, context);
+                          });
+                  },
+                                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 55,
+                    decoration: BoxDecoration(
+                        color: Color(0xff5200C6),
+                        borderRadius: BorderRadius.circular(5.0)),
+                    child: Center(
+                      child: Text(
+                        'Create account',
+                        style: TextStyle(
+                          fontFamily: 'Sfpro',
+                          color: Colors.white,
+                          fontSize: 17,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ),
