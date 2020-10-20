@@ -2,9 +2,11 @@
 import 'package:CustomerApp/ui/Intro/intro_page.dart';
 import 'package:CustomerApp/ui/loginScreen/create_account.dart';
 import 'package:CustomerApp/ui/loginScreen/forgot_passoword.dart';
+import 'package:CustomerApp/ui/navigator.dart';
 import 'package:CustomerApp/ui/splashScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:CustomerApp/ui/loginScreen/login.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 void main() {
   runApp(MyApp());
@@ -20,13 +22,22 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home:IntroPage(),
+      // home:IntroPage(),
+      home: NavigatorPage(),
+
        routes: <String, WidgetBuilder> {
     '/splash': (BuildContext context) => new Splash(),
     '/login' : (BuildContext context) => Login(),
     // '/noticeboard' : (BuildContext context) => NoticeBoard(),
      '/createAccount' : (BuildContext context) => CreateAccount(),
      '/profile' :(BuildContext context)=>ForgotPassword(),
+
+     "/webview": (_) => WebviewScaffold(
+              url: url,
+              withJavascript: true,
+              withLocalStorage: true,
+              withZoom: true,
+            )
     // '/homePage':(BuildContext context)=>HomePage(),
        }
     );

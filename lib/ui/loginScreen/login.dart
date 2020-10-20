@@ -307,6 +307,7 @@ import 'package:CustomerApp/ui/widgets/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 String url = "http://54.170.249.39:8080/CustomerApp/";
 
@@ -505,10 +506,20 @@ class _HomeView1State extends State<HomeView1> {
                       child: FlatButton(
                         onPressed: () {
                           PostRestService.login(email.text, password.text)
-                              .then((result) {
+                              .then((result)async {
                             print(result.toString());
 
                             if (result.status == 1) {
+                              var prefs = await SharedPreferences.getInstance();
+
+                              prefs.setString("customerRegId", result.customerDetails["customer_reg_id"]);
+
+
+
+
+
+
+
                               Navigator.of(context).pushNamed("/webview");
                             } else
                               errorBottomSheet(result.msg, context);

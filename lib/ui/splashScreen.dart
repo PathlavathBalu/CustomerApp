@@ -1,8 +1,8 @@
-
 import 'package:CustomerApp/ui/loginScreen/login.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Splash extends StatefulWidget {
   Splash({
@@ -13,20 +13,42 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> {
+  var customerRegId;
   startTime() async {
+    var prefs = await SharedPreferences.getInstance();
+    setState(() {
+      customerRegId = prefs.getString("customerRegId");
+    });
+
     var _duration = new Duration(seconds: 4);
-    return new Timer(_duration, navigationPage);
+
+    return Timer(_duration, navigationPage);
   }
+
+  // getData() async {
+  //   var prefs = await SharedPreferences.getInstance();
+  //   setState(() {
+  //     customerRegId = prefs.getString("customerRegId");
+  //   });
+  // }
 
   @override
   void initState() {
     super.initState();
+    // getData();
     startTime();
   }
 
+//navigate to the home page
+  // void navigateToHomePage() {
+  //   Navigator.of(context).pushNamed("/webview");
+  // }
+
   void navigationPage() {
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (BuildContext context) => Login()));
+    customerRegId == null
+        ? Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (BuildContext context) => Login()))
+        : Navigator.of(context).pushNamedAndRemoveUntil("/webview", (route) => false);
   }
 
   @override
@@ -34,11 +56,11 @@ class _SplashState extends State<Splash> {
     return Scaffold(
       backgroundColor: const Color(0xffffffff),
       body: Container(
-        child:Image.asset(
-                          'assets/images/splash.png',
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height,
-                        ),
+        child: Image.asset(
+          'assets/images/splash.png',
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+        ),
       ),
     );
   }
