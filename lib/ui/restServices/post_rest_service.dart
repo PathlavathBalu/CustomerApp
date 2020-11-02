@@ -9,6 +9,12 @@ import '../loginScreen/forgot_passoword.dart';
 class PostRestService {
   static String url = "https://www.eposhybrid.uk/index.php/customerServices/";
 
+
+
+
+
+  
+
   static Future<dynamic> registerUser(String name, String email, String mobile,
       String password, int storedFlag, int promotionFlag) async {
     Map<String, dynamic> info = {
