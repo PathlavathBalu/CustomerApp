@@ -345,10 +345,12 @@ class _HomeView1State extends State<HomeView1> {
   TextEditingController controller = TextEditingController(text: url);
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+  Future getAuthToken;
 
   @override
   void initState() {
     super.initState();
+    getAuthToken = PostRestService.generateAuthToken();
     webView.close();
     controller.addListener(() {
       url = controller.text;
@@ -506,19 +508,13 @@ class _HomeView1State extends State<HomeView1> {
                       child: FlatButton(
                         onPressed: () {
                           PostRestService.login(email.text, password.text)
-                              .then((result)async {
+                              .then((result) async {
                             print(result.toString());
 
                             if (result.status == 1) {
-                              var prefs = await SharedPreferences.getInstance();
+                              // var prefs = await SharedPreferences.getInstance();
 
-                              prefs.setString("customerRegId", result.customerDetails["customer_reg_id"]);
-
-
-
-
-
-
+                              // prefs.setString("customerRegId", result.customerDetails["customer_reg_id"]);
 
                               Navigator.of(context).pushNamed("/webview");
                             } else
